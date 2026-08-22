@@ -1,0 +1,117 @@
+﻿body {
+    margin: 0;
+    min-height: 100vh;
+    background-image: url('/images/loginBackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-page {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    width: 340px;
+    min-height: 490px;
+    padding: 1px 28px;
+    box-sizing: border-box;
+    background-color: rgba(170, 165, 215, 0.55);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 25px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.login-card h1 {
+    margin-bottom: 5px;
+    font-family: "Aladin", cursive;
+    font-size: 50px;
+    font-weight: 400;
+}
+
+.login-card h2 {
+    margin: 0 0 8px 0;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.login-card p {
+    margin: 0 0 25px 0;
+    font-size: 17px;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+.login-card form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-box {
+    width: 100%;
+    height: 46px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    border-radius: 12px;
+}
+
+.input-box:first-child {
+    margin-bottom: 24px;
+}
+
+.input-box img {
+    width: 22px;
+    height: 22px;
+    margin-right: 14px;
+    filter: brightness(0) invert(1);
+    }
+
+.input-box input {
+    color: white;
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+
+.input-box input::placeholder {
+    color: white;
+    opacity: 0.9;
+}
+
+.login-card button {
+    width: 100%;
+    height: 60px;
+    margin-top: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 12px;
+    background: linear-gradient(90deg, #5a93f5, #c96ce3);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.login-card button:hover {
+    opacity: 0.9;
+}
+
+.input-box input:-webkit-autofill {
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0 1000px transparent inset;
+    transition: background-color 9999s ease-in-out 0s;
+}

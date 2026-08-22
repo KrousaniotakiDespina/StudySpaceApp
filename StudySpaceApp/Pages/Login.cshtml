@@ -9,6 +9,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudySpace - Login</title>
+
+    <link rel="stylesheet" href="~/css/login.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Aladin&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -24,11 +27,18 @@
 
             <form method="post">
 
-                <input type="email" placeholder="Email address" />
+                <div class="input-box">
+                    <img src="/images/icons/email.svg" alt="Email" />
+                    <input type="email" placeholder="Email address" />
+                </div>
 
-                <input type="password" placeholder="Password" />
+                <div class="input-box">
+                    <img src="/images/icons/lock.svg" alt="Password" />
+                    <input type="password" placeholder="Password" />
+                </div>
 
                 <button type="submit">Log In</button>
+
             </form>
 
         </div>
