@@ -1,0 +1,428 @@
+﻿@page "/dashboard"
+@model StudySpaceApp.Pages.DashboardModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>StudySpace - Dashboard</title>
+
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Aladin&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard-page">
+
+        <aside class="sidebar">
+
+            <h1>StudySpace</h1>
+
+            <div class="dashboard-link">
+
+                <img src="~/images/icons/home.svg"
+                     alt="Dashboard"
+                     class="sidebar-icon" />
+                <span>Dashboard</span>
+
+            </div>
+
+            <div class="sidebar-bottom">
+                <div class="theme-section">
+
+                    <div class="theme-heading">
+
+                        <img src="~/images/icons/palette.svg"
+                             alt="Theme"
+                             class="sidebar-icon" />
+                        <span>Theme</span>
+
+                    </div>
+
+                    <div class="theme-colors">
+                        <button class="theme-circle pink" type="button"></button>
+                        <button class="theme-circle blue" type="button"></button>
+                        <button class="theme-circle green" type="button"></button>
+                        <button class="theme-circle gray" type="button"></button>
+                    </div>
+                </div>
+
+                <button class="logout-button" type="button">
+
+                    <img src="~/images/icons/logout.svg"
+                         alt="Log out"
+                         class="sidebar-icon" />
+                    <span>Log out</span>
+
+                </button>
+
+            </div>
+
+        </aside>
+
+        <main class="main-content">
+
+            <div class="user-header">
+                <img src="~/images/icons/avatar.svg"
+                     alt="User"
+                     class="avatar-image" />
+                <span>Mike N.</span>
+            </div>
+
+            <div class="top-row">
+
+                <section class="dashboard-card calendar-card">
+
+                    <div class="calendar-title">
+
+                        <div class="calendar-heading">
+                            <img src="~/images/icons/calendar.svg" alt="Calendar" class="calendar-icon" />
+                            <h2>Calendar</h2>
+                        </div>
+
+                        <div class="calendar-month">
+                            <button type="button" class="calendar-arrow">←</button>
+                            <span>August 2025</span>
+                            <button type="button" class="calendar-arrow">→</button>
+                        </div>
+
+                    </div>
+
+                    <div class="calendar-grid">
+
+                        <div class="calendar-cell empty"></div>
+                        <div class="calendar-cell"><span class="day-number">1</span></div>
+                        <div class="calendar-cell"><span class="day-number">2</span></div>
+                        <div class="calendar-cell"><span class="day-number">3</span></div>
+                        <div class="calendar-cell"><span class="day-number">4</span></div>
+                        <div class="calendar-cell"><span class="day-number">5</span></div>
+                        <div class="calendar-cell"><span class="day-number">6</span></div>
+
+                        <div class="calendar-cell"><span class="day-number">7</span></div>
+                        <div class="calendar-cell"><span class="day-number">8</span></div>
+                        <div class="calendar-cell"><span class="day-number selected-day">9</span></div>
+                        <div class="calendar-cell"><span class="day-number">10</span></div>
+                        <div class="calendar-cell"><span class="day-number">11</span></div>
+                        <div class="calendar-cell"><span class="day-number">12</span></div>
+                        <div class="calendar-cell"><span class="day-number">13</span></div>
+
+                        <div class="calendar-cell"><span class="day-number">14</span></div>
+                        <div class="calendar-cell"><span class="day-number">15</span></div>
+                        <div class="calendar-cell"><span class="day-number">16</span></div>
+                        <div class="calendar-cell"><span class="day-number">17</span></div>
+                        <div class="calendar-cell"><span class="day-number">18</span></div>
+                        <div class="calendar-cell"><span class="day-number">19</span></div>
+                        <div class="calendar-cell"><span class="day-number">20</span></div>
+
+                        <div class="calendar-cell"><span class="day-number">21</span></div>
+                        <div class="calendar-cell"><span class="day-number">22</span></div>
+                        <div class="calendar-cell"><span class="day-number">23</span></div>
+                        <div class="calendar-cell"><span class="day-number">24</span></div>
+                        <div class="calendar-cell"><span class="day-number">25</span></div>
+                        <div class="calendar-cell"><span class="day-number">26</span></div>
+                        <div class="calendar-cell"><span class="day-number">27</span></div>
+
+                        <div class="calendar-cell"><span class="day-number">28</span></div>
+                        <div class="calendar-cell"><span class="day-number">29</span></div>
+                        <div class="calendar-cell"><span class="day-number">30</span></div>
+                        <div class="calendar-cell"><span class="day-number">31</span></div>
+
+                    </div>
+
+                </section>
+
+                <section class="dashboard-card todo-card">
+
+                    <div class="card-title-row">
+
+                        <div class="todo-heading">
+                            <img src="~/images/icons/todo.svg"
+                                 alt="To-do List"
+                                 class="todo-icon" />
+
+                            <h2>To-do-List</h2>
+                        </div>
+
+                        <button type="button" class="small-button">
+                            + Add task
+                        </button>
+
+                    </div>
+
+                    <div class="todo-list">
+
+                        <div class="todo-item">
+                            <input type="checkbox" />
+                            <span>Push project files</span>
+                        </div>
+
+                        <div class="todo-item">
+                            <input type="checkbox" />
+                            <span>Chapter 5 exercises</span>
+                        </div>
+
+                        <div class="todo-item">
+                            <input type="checkbox" />
+                            <span>Representation</span>
+                        </div>
+
+                        <div class="todo-item">
+                            <input type="checkbox" checked />
+                            <span>Todays study</span>
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+            <div class="bottom-row">
+
+                <section class="dashboard-card notes-card">
+
+                    <div class="card-title-row">
+
+                        <div class="notes-heading">
+                            <img src="~/images/icons/notes.svg"
+                                 alt="Notes"
+                                 class="notes-icon" />
+
+                            <h2>Notes</h2>
+                        </div>
+
+                        <button type="button" class="small-button">
+                            + New Note
+                        </button>
+
+                    </div>
+
+                    <div class="notes-list">
+
+                        <div class="note-item">
+                            Read about dependency injection and take short notes on how it works.
+                            Connect each one with an example.
+                        </div>
+
+                        <div class="note-item">
+                            Practice Razor Pages by creating a simple form with validation.
+                            Check the data between the page model and the interface.
+                        </div>
+
+                        <div class="note-item">
+                            Read about HTTP methods and how applications communicate with a server.
+                            Take short notes on GET, POST, PUT, and DELETE.
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <section class="dashboard-card timer-card">
+
+                    <div class="timer-heading">
+                        <img src="~/images/icons/timer.svg"
+                             alt="Timer"
+                             class="timer-icon" />
+
+                        <h2>Timer</h2>
+                    </div>
+
+                    <div class="timer-content">
+
+                        <div class="timer-circle">
+
+                            <span class="timer-label">Focus</span>
+
+                            <span class="timer-time">
+                                25 : 00
+                            </span>
+
+                        </div>
+
+                        <div class="timer-controls">
+
+                            <button type="button" class="reset-button">
+                                <img src="~/images/icons/restart.svg"
+                                     alt="Restart"
+                                     class="restart-icon" />
+                            </button>
+
+                            <button type="button" class="play-button">
+                                <img src="~/images/icons/play.svg"
+                                     alt="Play"
+                                     class="play-icon" />
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <section class="dashboard-card music-card">
+
+                    <div class="music-heading">
+                        <img src="~/images/icons/music.svg"
+                             alt="Music"
+                             class="music-icon" />
+
+                        <h2>Music</h2>
+                    </div>
+
+                    <div class="music-list">
+
+                        <button type="button"
+                                class="music-button"
+                                data-audio="/audio/forest.wav">
+                            <span class="music-emoji">🌲</span>
+                            <span class="music-name">Forest</span>
+                        </button>
+
+                        <button type="button"
+                                class="music-button"
+                                data-audio="/audio/rain.wav">
+                            <span class="music-emoji">🌧️</span>
+                            <span class="music-name">Rain</span>
+                        </button>
+
+                        <button type="button"
+                                class="music-button"
+                                data-audio="/audio/waves.wav">
+                            <span class="music-emoji">🌊</span>
+                            <span class="music-name">Waves</span>
+                        </button>
+
+                        <button type="button"
+                                class="music-button"
+                                data-audio="/audio/fireplace.wav">
+                            <span class="music-emoji">🔥</span>
+                            <span class="music-name">Fireplace</span>
+                        </button>
+
+                        <button type="button"
+                                class="music-button"
+                                data-audio="/audio/jazz.mp3">
+                            <span class="music-emoji">🎷</span>
+                            <span class="music-name">Jazz</span>
+                        </button>
+
+                        <button type="button"
+                                class="music-button"
+                                data-audio="/audio/chill.mp3">
+                            <span class="music-emoji">🎵</span>
+                            <span class="music-name">Chill Beats</span>
+                        </button>
+
+                    </div>
+
+                    <div class="now-playing">
+
+                        <button type="button"
+                                id="now-playing-button"
+                                class="now-playing-button">
+
+                            <img src="~/images/icons/play.svg"
+                                 alt="Play"
+                                 id="now-playing-icon" />
+
+                        </button>
+
+                        <div class="now-playing-info">
+                            <span id="current-track">Select music</span>
+                            <small id="playing-status">Not playing</small>
+                        </div>
+
+                    </div>
+
+                    <audio id="music-player" loop></audio>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script>
+
+            const musicButtons = document.querySelectorAll(".music-button");
+
+            const musicPlayer = document.getElementById("music-player");
+
+            const nowPlayingButton =
+                document.getElementById("now-playing-button");
+
+            const nowPlayingIcon =
+                document.getElementById("now-playing-icon");
+
+            const currentTrack =
+                document.getElementById("current-track");
+
+            const playingStatus =
+                document.getElementById("playing-status");
+
+
+            musicButtons.forEach(button => {
+
+                button.addEventListener("click", () => {
+
+                    const audioFile =
+                        button.getAttribute("data-audio");
+
+                    const trackName =
+                        button.textContent.trim();
+
+                    musicPlayer.src = audioFile;
+
+                    musicPlayer.play();
+
+                    nowPlayingIcon.src = "/images/icons/pause.svg";
+
+                    currentTrack.textContent = trackName;
+
+                    playingStatus.textContent = "Now playing";
+
+                });
+
+            });
+
+            nowPlayingButton.addEventListener("click", () => {
+
+                if (!musicPlayer.src) {
+                    return;
+                }
+
+                if (musicPlayer.paused) {
+
+                    musicPlayer.play();
+
+                    playingStatus.textContent = "Now playing";
+
+                    nowPlayingIcon.src = "/images/icons/pause.svg";
+
+                }
+                else {
+
+                    musicPlayer.pause();
+
+                    playingStatus.textContent = "Paused";
+
+                    nowPlayingIcon.src = "/images/icons/play.svg";
+
+                }
+
+            });
+
+    </script>
+
+</body>
+</html>

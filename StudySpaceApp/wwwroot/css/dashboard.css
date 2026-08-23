@@ -1,0 +1,667 @@
+﻿body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Georgia, serif;
+}
+
+.dashboard-page {
+    min-height: 100vh;
+    display: flex;
+    background: linear-gradient( 135deg, #78a5f5, #766ee7, #3010b4 );
+}
+
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 120px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 14px 12px;
+    background-color: rgba(58, 75, 128, 0.72);
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h1 {
+    margin: 0 0 25px 0;
+    font-family: "Aladin", cursive;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.dashboard-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+}
+
+.sidebar-icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+.theme-section {
+    margin-bottom: 55px;
+}
+
+.theme-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    margin-bottom: 14px;
+    margin-left: 6px;
+}
+
+.theme-colors {
+    display: flex;
+    gap: 7px;
+    justify-content: center;
+}
+
+.theme-circle {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.pink {
+    background-color: #e98ac5;
+}
+
+.blue {
+    background-color: #6d7bea;
+}
+
+.green {
+    background-color: #83b982;
+}
+
+.gray {
+    background-color: #666666;
+}
+
+.logout-button {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    margin-left: 6px;
+    gap: 8px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* MAIN AREA */
+
+.main-content {
+    flex: 1;
+    box-sizing: border-box;
+    padding: 15px;
+}
+
+.user-header {
+    height: 45px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 14px;
+}
+
+.avatar-image {
+    width: 32px;
+    height: 32px;
+    filter: brightness(0) invert(1);
+}
+
+/* GRID */
+
+.top-row {
+    display: flex;
+    gap: 25px;
+}
+
+.bottom-row {
+    display: flex;
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.dashboard-card {
+    background-color: rgba(154, 180, 245, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 22px;
+    box-shadow: 0 10px 25px rgba(19, 21, 88, 0.25);
+    color: white;
+    box-sizing: border-box;
+    padding: 18px;
+}
+
+.calendar-card {
+    flex: 1;
+    height: 330px;
+    container-type: inline-size;
+}
+
+.todo-card {
+    flex: 1;
+    height: 330px;
+}
+
+.notes-card {
+    flex: 1.25;
+    height: 365px;
+    display: flex;
+    flex-direction: column;
+}
+
+.timer-card {
+    flex: 0.9;
+    height: 365px;
+}
+
+.music-card {
+    flex: 1.25;
+    height: 365px;
+}
+
+.dashboard-card h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.card-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.small-button {
+    padding: 5px 14px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+/* CALENDAR */
+
+.calendar-title {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.calendar-heading {
+    grid-column: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+.calendar-icon {
+    width: 22px;
+    height: 22px;
+    filter: brightness(0) invert(1);
+}
+
+.calendar-heading h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.calendar-month {
+    grid-column: 2;
+    position: static;
+    transform: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    white-space: nowrap;
+    font-size: 18px;
+}
+
+.calendar-arrow {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.calendar-grid {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-cell {
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    font-family: Arial, sans-serif;
+    color: white;
+    font-variant-numeric: tabular-nums;
+}
+
+.calendar-cell.empty {
+    color: transparent;
+}
+
+.day-number {
+    width: 26px;
+    height: 26px;
+    flex: 0 0 26px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Inconsolata", monospace;
+    font-size: 20px;
+}
+
+.selected-day {
+    width: 38px;
+    height: 29px;
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+/* TO-DO LIST */
+
+.todo-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.todo-icon {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+}
+
+.todo-list {
+    margin-top: 25px;
+}
+
+.todo-item {
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 18px;
+}
+
+.todo-item:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.todo-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #6495ed;
+    cursor: pointer;
+}
+
+.todo-item input[type="checkbox"]:checked + span {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+/* NOTES */
+
+.notes-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.notes-icon {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+}
+
+.notes-list {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.note-item {
+    padding: 12px;
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 18px;
+    font-size: 17px;
+    line-height: 1.2;
+    color: white;
+}
+
+.notes-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.notes-list::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.45);
+    border-radius: 10px;
+}
+
+.notes-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* TIMER */
+
+.timer-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.timer-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.timer-icon {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+}
+
+.timer-content {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.timer-circle {
+    width: 145px;
+    height: 145px;
+    box-sizing: border-box;
+    border: 10px solid white;
+    border-top-color: transparent;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.timer-label {
+    font-size: 15px;
+    margin-bottom: 1px;
+}
+
+.timer-time {
+    font-size: 28px;
+    font-family: Arial, sans-serif;
+}
+
+.timer-controls {
+    position: relative;
+    width: 145px;
+    height: 60px;
+    margin-top: 20px;
+}
+
+.reset-button {
+    position: absolute;
+    left: 1px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    appearance: none;
+}
+
+.play-button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 55px;
+    height: 55px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    appearance: none;
+}
+
+.restart-icon {
+    width: 35px;
+    height: 35px;
+    margin-right: 35px;
+    filter: brightness(0) invert(1);
+}
+
+.play-icon {
+    width: 55px;
+    height: 55px;
+    filter: brightness(0) invert(1);
+}
+
+/* MUSIC */
+
+.music-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.music-icon {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+}
+
+.music-list {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.music-button {
+    height: 88px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    background-color: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 20px;
+    color: white;
+    font-family: Georgia, serif;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.music-emoji {
+    font-size: 26px;
+    line-height: 1;
+}
+
+.music-name {
+    font-size: 18px;
+}
+
+.music-button:hover {
+    background-color: rgba(255, 255, 255, 0.18);
+}
+
+
+/* NOW PLAYING */
+
+.now-playing {
+    margin-top: 27px;
+    height: 60px;
+    padding: 0 14px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 18px;
+}
+
+.now-playing-button {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.now-playing-button img {
+    width: 42px;
+    height: 42px;
+    filter: brightness(0) invert(1);
+}
+
+.now-playing-info {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+#current-track {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#playing-status {
+    margin-top: 3px;
+    margin-left: 8px;
+    font-size: 13px;
+    opacity: 0.85;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+    .dashboard-page {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        width: 120px;
+        min-width: 120px;
+        min-height: 100vh;
+    }
+
+    .main-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .top-row,
+    .bottom-row {
+        flex-direction: column;
+    }
+
+    .calendar-card,
+    .todo-card,
+    .notes-card,
+    .timer-card,
+    .music-card {
+        width: 100%;
+        height: auto;
+        min-height: 330px;
+    }
+
+    .calendar-title {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .calendar-month {
+        position: static;
+        transform: none;
+        align-self: center;
+    }
+
+    .notes-card {
+        min-height: 420px;
+    }
+
+    .note-item {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@container (max-width: 400px) {
+
+    .calendar-title {
+        grid-template-columns: 1fr;
+        row-gap: 8px;
+    }
+
+    .calendar-heading {
+        grid-column: 1;
+    }
+
+    .calendar-month {
+        grid-column: 1;
+        justify-self: center;
+    }
+}
