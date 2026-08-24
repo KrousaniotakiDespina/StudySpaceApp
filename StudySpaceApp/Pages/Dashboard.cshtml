@@ -88,52 +88,23 @@
                         </div>
 
                         <div class="calendar-month">
-                            <button type="button" class="calendar-arrow">←</button>
-                            <span>August 2025</span>
-                            <button type="button" class="calendar-arrow">→</button>
+
+                            <button type="button" class="calendar-arrow" id="previous-month">
+                                ←
+                            </button>
+
+                            <span id="calendar-month-title"></span>
+
+                            <button type="button" class="calendar-arrow" id="next-month">
+                                →
+                            </button>
+
                         </div>
 
                     </div>
 
-                    <div class="calendar-grid">
-
-                        <div class="calendar-cell empty"></div>
-                        <div class="calendar-cell"><span class="day-number">1</span></div>
-                        <div class="calendar-cell"><span class="day-number">2</span></div>
-                        <div class="calendar-cell"><span class="day-number">3</span></div>
-                        <div class="calendar-cell"><span class="day-number">4</span></div>
-                        <div class="calendar-cell"><span class="day-number">5</span></div>
-                        <div class="calendar-cell"><span class="day-number">6</span></div>
-
-                        <div class="calendar-cell"><span class="day-number">7</span></div>
-                        <div class="calendar-cell"><span class="day-number">8</span></div>
-                        <div class="calendar-cell"><span class="day-number selected-day">9</span></div>
-                        <div class="calendar-cell"><span class="day-number">10</span></div>
-                        <div class="calendar-cell"><span class="day-number">11</span></div>
-                        <div class="calendar-cell"><span class="day-number">12</span></div>
-                        <div class="calendar-cell"><span class="day-number">13</span></div>
-
-                        <div class="calendar-cell"><span class="day-number">14</span></div>
-                        <div class="calendar-cell"><span class="day-number">15</span></div>
-                        <div class="calendar-cell"><span class="day-number">16</span></div>
-                        <div class="calendar-cell"><span class="day-number">17</span></div>
-                        <div class="calendar-cell"><span class="day-number">18</span></div>
-                        <div class="calendar-cell"><span class="day-number">19</span></div>
-                        <div class="calendar-cell"><span class="day-number">20</span></div>
-
-                        <div class="calendar-cell"><span class="day-number">21</span></div>
-                        <div class="calendar-cell"><span class="day-number">22</span></div>
-                        <div class="calendar-cell"><span class="day-number">23</span></div>
-                        <div class="calendar-cell"><span class="day-number">24</span></div>
-                        <div class="calendar-cell"><span class="day-number">25</span></div>
-                        <div class="calendar-cell"><span class="day-number">26</span></div>
-                        <div class="calendar-cell"><span class="day-number">27</span></div>
-
-                        <div class="calendar-cell"><span class="day-number">28</span></div>
-                        <div class="calendar-cell"><span class="day-number">29</span></div>
-                        <div class="calendar-cell"><span class="day-number">30</span></div>
-                        <div class="calendar-cell"><span class="day-number">31</span></div>
-
+                    <div class="calendar-grid"
+                         id="calendar-grid">
                     </div>
 
                 </section>
@@ -541,6 +512,149 @@
             });
 
             updateTimerDisplay();
+
+    </script>
+
+    <script>
+
+            const calendarGrid =
+                document.getElementById("calendar-grid");
+
+            const calendarMonthTitle =
+                document.getElementById("calendar-month-title");
+
+            const previousMonthButton =
+                document.getElementById("previous-month");
+
+            const nextMonthButton =
+                document.getElementById("next-month");
+
+
+            const today = new Date();
+
+            let currentMonth = today.getMonth();
+            let currentYear = today.getFullYear();
+
+
+            const monthNames = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ];
+
+
+            function renderCalendar() {
+
+                calendarGrid.innerHTML = "";
+
+
+                calendarMonthTitle.textContent =
+                    `${monthNames[currentMonth]} ${currentYear}`;
+
+
+                const firstDay =
+                    new Date(currentYear, currentMonth, 1).getDay();
+
+
+                const mondayFirstDay =
+                    (firstDay + 6) % 7;
+
+
+                const daysInMonth =
+                    new Date(currentYear, currentMonth + 1, 0).getDate();
+
+
+                for (let i = 0; i < mondayFirstDay; i++) {
+
+                    const emptyCell =
+                        document.createElement("div");
+
+                    emptyCell.classList.add(
+                        "calendar-cell",
+                        "empty"
+                    );
+
+                    calendarGrid.appendChild(emptyCell);
+                }
+
+
+                for (let day = 1; day <= daysInMonth; day++) {
+
+                    const calendarCell =
+                        document.createElement("div");
+
+                    calendarCell.classList.add("calendar-cell");
+
+
+                    const dayNumber =
+                        document.createElement("span");
+
+                    dayNumber.classList.add("day-number");
+
+                    dayNumber.textContent = day;
+
+
+                    if (
+                        day === today.getDate() &&
+                        currentMonth === today.getMonth() &&
+                        currentYear === today.getFullYear()
+                    ) {
+
+                        dayNumber.classList.add("selected-day");
+
+                    }
+
+
+                    calendarCell.appendChild(dayNumber);
+
+                    calendarGrid.appendChild(calendarCell);
+                }
+
+            }
+
+
+            previousMonthButton.addEventListener("click", () => {
+
+                currentMonth--;
+
+                if (currentMonth < 0) {
+
+                    currentMonth = 11;
+
+                    currentYear--;
+                }
+
+                renderCalendar();
+
+            });
+
+
+            nextMonthButton.addEventListener("click", () => {
+
+                currentMonth++;
+
+                if (currentMonth > 11) {
+
+                    currentMonth = 0;
+
+                    currentYear++;
+                }
+
+                renderCalendar();
+
+            });
+
+
+            renderCalendar();
 
     </script>
 
