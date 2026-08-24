@@ -239,9 +239,11 @@
 
                         <div class="timer-circle">
 
-                            <span class="timer-label">Focus</span>
+                            <span class="timer-label" id="timer-label">
+                                Focus
+                            </span>
 
-                            <span class="timer-time">
+                            <span class="timer-time" id="timer-time">
                                 25 : 00
                             </span>
 
@@ -352,6 +354,8 @@
 
     </div>
 
+    <audio id="bell-sound" src="/audio/bell.mp3"></audio>
+
     <script>
 
             const musicButtons = document.querySelectorAll(".music-button");
@@ -421,6 +425,122 @@
                 }
 
             });
+
+    </script>
+
+    <script>
+
+            const timerDisplay = document.getElementById("timer-time");
+            const timerLabel = document.getElementById("timer-label");
+
+            const playButton = document.querySelector(".play-button");
+            const restartButton = document.querySelector(".reset-button");
+
+            const bellSound = document.getElementById("bell-sound");
+
+            const timerPlayIcon = playButton.querySelector("img");
+
+            const focusTime = 25 * 60;
+            const breakTime = 5 * 60;
+
+            let totalSeconds = focusTime;
+
+            let isFocus = true;
+            let isRunning = false;
+
+            let timerInterval = null;
+
+            function updateTimerDisplay() {
+
+                const minutes = Math.floor(totalSeconds / 60);
+                const seconds = totalSeconds % 60;
+
+                timerDisplay.textContent =
+                    `${String(minutes).padStart(2, "0")} : ${String(seconds).padStart(2, "0")}`;
+            }
+
+            function changePomodoroMode() {
+
+                bellSound.currentTime = 0;
+
+                bellSound.play();
+
+                if (isFocus) {
+
+                    isFocus = false;
+
+                    totalSeconds = breakTime;
+
+                    timerLabel.textContent = "Break";
+
+                }
+                else {
+
+                    isFocus = true;
+
+                    totalSeconds = focusTime;
+
+                    timerLabel.textContent = "Focus";
+                }
+
+                updateTimerDisplay();
+            }
+
+            playButton.addEventListener("click", () => {
+
+                if (isRunning) {
+
+                    clearInterval(timerInterval);
+
+                    isRunning = false;
+
+                    timerPlayIcon.src = "/images/icons/play.svg";
+
+                    return;
+                }
+
+                isRunning = true;
+
+                timerPlayIcon.src = "/images/icons/pause.svg";
+
+                timerInterval = setInterval(() => {
+
+                    if (totalSeconds > 0) {
+
+                        totalSeconds--;
+
+                        updateTimerDisplay();
+
+                    }
+                    else {
+
+                        changePomodoroMode();
+
+                    }
+
+                }, 1000);
+
+            });
+
+            restartButton.addEventListener("click", () => {
+
+                clearInterval(timerInterval);
+
+                isFocus = true;
+
+                totalSeconds = focusTime;
+
+                isRunning = false;
+
+                timerLabel.textContent = "Focus";
+
+                timerPlayIcon.src = "/images/icons/play.svg";
+
+                updateTimerDisplay();
+
+            });
+
+            updateTimerDisplay();
 
     </script>
 
