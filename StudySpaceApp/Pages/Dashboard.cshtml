@@ -47,10 +47,27 @@
                     </div>
 
                     <div class="theme-colors">
-                        <button class="theme-circle pink" type="button"></button>
-                        <button class="theme-circle blue" type="button"></button>
-                        <button class="theme-circle green" type="button"></button>
-                        <button class="theme-circle gray" type="button"></button>
+
+                        <button class="theme-circle pink"
+                                type="button"
+                                data-theme="pink">
+                        </button>
+
+                        <button class="theme-circle blue"
+                                type="button"
+                                data-theme="blue">
+                        </button>
+
+                        <button class="theme-circle green"
+                                type="button"
+                                data-theme="green">
+                        </button>
+
+                        <button class="theme-circle gray"
+                                type="button"
+                                data-theme="gray">
+                        </button>
+
                     </div>
                 </div>
 
@@ -403,6 +420,7 @@
 
             const timerDisplay = document.getElementById("timer-time");
             const timerLabel = document.getElementById("timer-label");
+            const timerCircle = document.querySelector(".timer-circle");
 
             const playButton = document.querySelector(".play-button");
             const restartButton = document.querySelector(".reset-button");
@@ -426,8 +444,18 @@
                 const minutes = Math.floor(totalSeconds / 60);
                 const seconds = totalSeconds % 60;
 
-                timerDisplay.textContent =
-                    `${String(minutes).padStart(2, "0")} : ${String(seconds).padStart(2, "0")}`;
+
+                timerDisplay.textContent = `${String(minutes).padStart(2, "0")} : ${String(seconds).padStart(2, "0")}`;
+
+                const currentDuration = isFocus ? focusTime : breakTime;
+
+                const progress = (totalSeconds / currentDuration) * 100;
+
+                timerCircle.style.setProperty(
+                    "--progress",
+                    progress + "%"
+                );
+
             }
 
             function changePomodoroMode() {
@@ -658,5 +686,63 @@
 
     </script>
 
+    <script>
+
+            const themeButtons =
+                document.querySelectorAll(".theme-circle");
+
+            const dashboardPage =
+                document.querySelector(".dashboard-page");
+
+
+            const savedTheme =
+                localStorage.getItem("selectedTheme");
+
+
+            if (savedTheme && savedTheme !== "blue") {
+
+                dashboardPage.classList.add(
+                    savedTheme + "-theme"
+                );
+
+            }
+
+
+            themeButtons.forEach(button => {
+
+                button.addEventListener("click", () => {
+
+                    const selectedTheme =
+                        button.getAttribute("data-theme");
+
+
+                    dashboardPage.classList.remove(
+                        "pink-theme",
+                        "green-theme",
+                        "gray-theme"
+                    );
+
+
+                    if (selectedTheme !== "blue") {
+
+                        dashboardPage.classList.add(
+                            selectedTheme + "-theme"
+                        );
+
+                    }
+
+
+                    localStorage.setItem(
+                        "selectedTheme",
+                        selectedTheme
+                    );
+
+                });
+
+            });
+
+    </script>
+
 </body>
+
 </html>
