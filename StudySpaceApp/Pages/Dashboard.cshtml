@@ -186,8 +186,10 @@
                             <h2>Notes</h2>
                         </div>
 
-                        <button type="button" class="small-button">
-                            + New Note
+                        <button type="button"
+                                class="small-button"
+                                id="new-note-button">
+                                + New Note
                         </button>
 
                     </div>
@@ -195,18 +197,45 @@
                     <div class="notes-list">
 
                         <div class="note-item">
-                            Read about dependency injection and take short notes on how it works.
-                            Connect each one with an example.
+
+                            <span>
+                                Read about dependency injection and take short notes on how it works.
+                                Connect each one with an example.
+                            </span>
+
+                            <button type="button"
+                                    class="delete-note-button">
+                                ×
+                            </button>
+
                         </div>
 
                         <div class="note-item">
-                            Practice Razor Pages by creating a simple form with validation.
-                            Check the data between the page model and the interface.
+
+                            <span>
+                                Practice Razor Pages by creating a simple form with validation.
+                                Check the data between the page model and the interface.
+                            </span>
+
+                            <button type="button"
+                                    class="delete-note-button">
+                                ×
+                            </button>
+
                         </div>
 
                         <div class="note-item">
-                            Read about HTTP methods and how applications communicate with a server.
-                            Take short notes on GET, POST, PUT, and DELETE.
+
+                            <span>
+                                Read about HTTP methods and how applications communicate with a server.
+                                Take short notes on GET, POST, PUT, and DELETE.
+                            </span>
+
+                            <button type="button"
+                                    class="delete-note-button">
+                                ×
+                            </button>
+
                         </div>
 
                     </div>
@@ -557,12 +586,10 @@
             const nextMonthButton =
                 document.getElementById("next-month");
 
-
             const today = new Date();
 
             let currentMonth = today.getMonth();
             let currentYear = today.getFullYear();
-
 
             const monthNames = [
                 "January",
@@ -579,11 +606,9 @@
                 "December"
             ];
 
-
             function renderCalendar() {
 
                 calendarGrid.innerHTML = "";
-
 
                 calendarMonthTitle.textContent =
                     `${monthNames[currentMonth]} ${currentYear}`;
@@ -592,14 +617,11 @@
                 const firstDay =
                     new Date(currentYear, currentMonth, 1).getDay();
 
-
                 const mondayFirstDay =
                     (firstDay + 6) % 7;
 
-
                 const daysInMonth =
                     new Date(currentYear, currentMonth + 1, 0).getDate();
-
 
                 for (let i = 0; i < mondayFirstDay; i++) {
 
@@ -614,14 +636,12 @@
                     calendarGrid.appendChild(emptyCell);
                 }
 
-
                 for (let day = 1; day <= daysInMonth; day++) {
 
                     const calendarCell =
                         document.createElement("div");
 
                     calendarCell.classList.add("calendar-cell");
-
 
                     const dayNumber =
                         document.createElement("span");
@@ -630,17 +650,13 @@
 
                     dayNumber.textContent = day;
 
-
                     if (
                         day === today.getDate() &&
                         currentMonth === today.getMonth() &&
                         currentYear === today.getFullYear()
                     ) {
-
                         dayNumber.classList.add("selected-day");
-
                     }
-
 
                     calendarCell.appendChild(dayNumber);
 
@@ -648,7 +664,6 @@
                 }
 
             }
-
 
             previousMonthButton.addEventListener("click", () => {
 
@@ -665,11 +680,10 @@
 
             });
 
-
             nextMonthButton.addEventListener("click", () => {
 
                 currentMonth++;
-
+             
                 if (currentMonth > 11) {
 
                     currentMonth = 0;
@@ -680,7 +694,6 @@
                 renderCalendar();
 
             });
-
 
             renderCalendar();
 
@@ -698,7 +711,6 @@
             const savedTheme =
                 localStorage.getItem("selectedTheme");
 
-
             if (savedTheme && savedTheme !== "blue") {
 
                 dashboardPage.classList.add(
@@ -706,7 +718,6 @@
                 );
 
             }
-
 
             themeButtons.forEach(button => {
 
@@ -731,13 +742,86 @@
 
                     }
 
-
                     localStorage.setItem(
                         "selectedTheme",
                         selectedTheme
                     );
 
                 });
+
+            });
+
+    </script>
+
+    <script>
+
+            const deleteNoteButtons =
+                document.querySelectorAll(".delete-note-button");
+
+            deleteNoteButtons.forEach(button => {
+
+                button.addEventListener("click", () => {
+
+                    const noteItem =
+                        button.closest(".note-item");
+
+                    noteItem.remove();
+
+                });
+
+            });
+
+    </script>
+
+    <script>
+
+            const newNoteButton =
+                document.getElementById("new-note-button");
+
+            const notesList =
+                document.querySelector(".notes-list");
+
+            newNoteButton.addEventListener("click", () => {
+
+                const noteText =
+                    prompt("Write your note:");
+
+                if (!noteText) {
+                    return;
+                }
+
+                const noteItem =
+                    document.createElement("div");
+
+                noteItem.classList.add("note-item");
+
+                const noteContent =
+                    document.createElement("span");
+
+                noteContent.textContent = noteText;
+
+                const deleteButton =
+                    document.createElement("button");
+
+                deleteButton.type = "button";
+
+                deleteButton.classList.add(
+                    "delete-note-button"
+                );
+
+                deleteButton.textContent = "×";
+
+                deleteButton.addEventListener("click", () => {
+
+                    noteItem.remove();
+
+                });
+
+                noteItem.appendChild(noteContent);
+
+                noteItem.appendChild(deleteButton);
+
+                notesList.appendChild(noteItem);
 
             });
 
