@@ -1,3 +1,5 @@
+using StudySpaceApp.Helpers;
+
 namespace StudySpaceApp
 {
     public class Program
@@ -8,6 +10,8 @@ namespace StudySpaceApp
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+
+            builder.Services.AddScoped<DBHelper>();
 
             var app = builder.Build();
 
