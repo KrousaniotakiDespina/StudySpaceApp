@@ -147,23 +147,55 @@
                     <div class="todo-list">
 
                         <div class="todo-item">
+
                             <input type="checkbox" />
+
                             <span>Push project files</span>
+
+                            <button type="button"
+                                    class="delete-task-button">
+                                ×
+                            </button>
+
                         </div>
 
                         <div class="todo-item">
+
                             <input type="checkbox" />
+
                             <span>Chapter 5 exercises</span>
+
+                            <button type="button"
+                                    class="delete-task-button">
+                                ×
+                            </button>
+
                         </div>
 
                         <div class="todo-item">
+
                             <input type="checkbox" />
+
                             <span>Representation</span>
+
+                            <button type="button"
+                                    class="delete-task-button">
+                                ×
+                            </button>
+
                         </div>
 
                         <div class="todo-item">
-                            <input type="checkbox" checked />
-                            <span>Todays study</span>
+
+                            <input type="checkbox" />
+
+                            <span>Checkbox</span>
+
+                            <button type="button"
+                                    class="delete-task-button">
+                                ×
+                            </button>
+
                         </div>
 
                     </div>
@@ -822,6 +854,26 @@
                 noteItem.appendChild(deleteButton);
 
                 notesList.appendChild(noteItem);
+
+            });
+
+    </script>
+
+    <script>
+
+            const deleteTaskButtons =
+                document.querySelectorAll(".delete-task-button");
+
+            deleteTaskButtons.forEach(button => {
+
+                button.addEventListener("click", () => {
+
+                    const taskItem =
+                        button.closest(".todo-item");
+
+                    taskItem.remove();
+
+                });
 
             });
 

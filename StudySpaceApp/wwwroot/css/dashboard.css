@@ -355,6 +355,28 @@ body {
     font-size: 18px;
 }
 
+.todo-item span {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.delete-task-button {
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    opacity: 0.8;
+}
+
+.delete-task-button:hover {
+    opacity: 1;
+}
+
 .todo-item:last-child {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
