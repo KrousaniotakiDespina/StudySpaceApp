@@ -138,8 +138,10 @@
                             <h2>To-do-List</h2>
                         </div>
 
-                        <button type="button" class="small-button">
-                            + Add task
+                        <button type="button"
+                                class="small-button"
+                                id="add-task-button">
+                                + Add task
                         </button>
 
                     </div>
@@ -404,6 +406,33 @@
     </div>
 
     <audio id="bell-sound" src="/audio/bell.mp3"></audio>
+
+    <div class="input-modal" id="input-modal">
+
+        <div class="input-modal-box">
+
+            <h3 id="modal-title">Add</h3>
+
+            <textarea id="modal-input"
+                      placeholder="Write here..."></textarea>
+
+            <div class="modal-buttons">
+
+                <button type="button"
+                        id="modal-cancel">
+                    Cancel
+                </button>
+
+                <button type="button"
+                        id="modal-save">
+                    Add
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <script>
 
@@ -807,60 +836,6 @@
 
     <script>
 
-            const newNoteButton =
-                document.getElementById("new-note-button");
-
-            const notesList =
-                document.querySelector(".notes-list");
-
-            newNoteButton.addEventListener("click", () => {
-
-                const noteText =
-                    prompt("Write your note:");
-
-                if (!noteText) {
-                    return;
-                }
-
-                const noteItem =
-                    document.createElement("div");
-
-                noteItem.classList.add("note-item");
-
-                const noteContent =
-                    document.createElement("span");
-
-                noteContent.textContent = noteText;
-
-                const deleteButton =
-                    document.createElement("button");
-
-                deleteButton.type = "button";
-
-                deleteButton.classList.add(
-                    "delete-note-button"
-                );
-
-                deleteButton.textContent = "×";
-
-                deleteButton.addEventListener("click", () => {
-
-                    noteItem.remove();
-
-                });
-
-                noteItem.appendChild(noteContent);
-
-                noteItem.appendChild(deleteButton);
-
-                notesList.appendChild(noteItem);
-
-            });
-
-    </script>
-
-    <script>
-
             const deleteTaskButtons =
                 document.querySelectorAll(".delete-task-button");
 
@@ -874,6 +849,175 @@
                     taskItem.remove();
 
                 });
+
+            });
+
+    </script>
+
+    <script>
+
+            const newNoteButton =
+                document.getElementById("new-note-button");
+
+            const addTaskButton =
+                document.getElementById("add-task-button");
+
+            const inputModal =
+                document.getElementById("input-modal");
+
+            const modalTitle =
+                document.getElementById("modal-title");
+
+            const modalInput =
+                document.getElementById("modal-input");
+
+            const modalCancel =
+                document.getElementById("modal-cancel");
+
+            const modalSave =
+                document.getElementById("modal-save");
+
+            const notesList =
+                document.querySelector(".notes-list");
+
+            const todoList =
+                document.querySelector(".todo-list");
+
+            let currentType = "";
+
+            newNoteButton.addEventListener("click", () => {
+
+                currentType = "note";
+
+                modalTitle.textContent = "New Note";
+
+                modalInput.placeholder = "Write your note...";
+
+                modalInput.value = "";
+
+                inputModal.classList.add("show");
+
+                modalInput.focus();
+
+            });
+
+            addTaskButton.addEventListener("click", () => {
+
+                currentType = "task";
+
+                modalTitle.textContent = "Add Task";
+
+                modalInput.placeholder = "Write your task...";
+
+                modalInput.value = "";
+
+                inputModal.classList.add("show");
+
+                modalInput.focus();
+
+            });
+
+            modalCancel.addEventListener("click", () => {
+
+                inputModal.classList.remove("show");
+
+                modalInput.value = "";
+
+            });
+
+            modalSave.addEventListener("click", () => {
+
+                const text =
+                    modalInput.value.trim();
+
+                if (!text) {
+                    return;
+                }
+
+                if (currentType === "note") {
+
+                    const noteItem =
+                        document.createElement("div");
+
+                    noteItem.classList.add("note-item");
+
+                    const noteContent =
+                        document.createElement("span");
+
+                    noteContent.textContent = text;
+
+                    const deleteButton =
+                        document.createElement("button");
+
+                    deleteButton.type = "button";
+
+                    deleteButton.classList.add(
+                        "delete-note-button"
+                    );
+
+                    deleteButton.textContent = "×";
+
+                    deleteButton.addEventListener("click", () => {
+
+                        noteItem.remove();
+
+                    });
+
+                    noteItem.appendChild(noteContent);
+
+                    noteItem.appendChild(deleteButton);
+
+                    notesList.appendChild(noteItem);
+
+                }
+
+                if (currentType === "task") {
+
+                    const todoItem =
+                        document.createElement("div");
+
+                    todoItem.classList.add("todo-item");
+
+                    const checkbox =
+                        document.createElement("input");
+
+                    checkbox.type = "checkbox";
+
+                    const taskContent =
+                        document.createElement("span");
+
+                    taskContent.textContent = text;
+
+                    const deleteButton =
+                        document.createElement("button");
+
+                    deleteButton.type = "button";
+
+                    deleteButton.classList.add(
+                        "delete-task-button"
+                    );
+
+                    deleteButton.textContent = "×";
+
+                    deleteButton.addEventListener("click", () => {
+
+                        todoItem.remove();
+
+                    });
+
+                    todoItem.appendChild(checkbox);
+
+                    todoItem.appendChild(taskContent);
+
+                    todoItem.appendChild(deleteButton);
+
+                    todoList.appendChild(todoItem);
+
+                }
+
+                inputModal.classList.remove("show");
+
+                modalInput.value = "";
 
             });
 
