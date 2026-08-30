@@ -71,14 +71,21 @@
                     </div>
                 </div>
 
-                <button class="logout-button" type="button">
+                <form method="post"
+                      asp-page-handler="Logout">
 
-                    <img src="~/images/icons/logout.svg"
-                         alt="Log out"
-                         class="sidebar-icon" />
-                    <span>Log out</span>
+                    <button class="logout-button"
+                            type="submit">
 
-                </button>
+                        <img src="~/images/icons/logout.svg"
+                             alt="Log out"
+                             class="sidebar-icon" />
+
+                        <span>Log out</span>
+
+                    </button>
+
+                </form>
 
             </div>
 
