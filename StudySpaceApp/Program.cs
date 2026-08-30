@@ -1,5 +1,6 @@
 using StudySpaceApp.DAO;
 using StudySpaceApp.Helpers;
+using StudySpaceApp.Service;
 
 namespace StudySpaceApp
 {
@@ -15,6 +16,8 @@ namespace StudySpaceApp
             builder.Services.AddScoped<DBHelper>();
 
             builder.Services.AddScoped<IUserDAO, UserDAOImpl>();
+
+            builder.Services.AddScoped<IUserService, UserServiceImpl>();
 
             var app = builder.Build();
 
