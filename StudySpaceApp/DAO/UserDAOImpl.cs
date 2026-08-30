@@ -12,23 +12,26 @@ namespace StudySpaceApp.DAO
         {
             _dbHelper = dbHelper;
         }
-        public User? GetUserByEmailAndPassword(string email, string password)
+
+        public User? GetUserByEmail(string email)
         {
-            using SqlConnection connection = _dbHelper.GetConnection();
+            using SqlConnection connection =
+                _dbHelper.GetConnection();
 
             connection.Open();
 
             string sql =
                 @"SELECT Id, Firstname, Lastname, Email, Password, Theme
                   FROM Users
-                  WHERE Email = @Email AND Password = @Password";
+                  WHERE Email = @Email";
 
             using SqlCommand command =
                 new SqlCommand(sql, connection);
 
-            command.Parameters.AddWithValue("@Email", email);
-
-            command.Parameters.AddWithValue("@Password", password);
+            command.Parameters.AddWithValue(
+                "@Email",
+                email
+            );
 
             using SqlDataReader reader =
                 command.ExecuteReader();
