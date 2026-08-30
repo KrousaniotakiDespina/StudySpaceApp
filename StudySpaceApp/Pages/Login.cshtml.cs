@@ -33,6 +33,18 @@ namespace StudySpaceApp.Pages
                 return Page();
             }
 
+            HttpContext.Session.SetInt32("UserId", user.Id);
+
+            HttpContext.Session.SetString(
+                "Firstname",
+                user.Firstname
+            );
+
+            HttpContext.Session.SetString(
+                "Theme",
+                user.Theme
+            );
+
             return RedirectToPage("/Dashboard");
         }
     }

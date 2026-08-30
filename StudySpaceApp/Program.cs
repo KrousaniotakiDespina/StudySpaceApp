@@ -13,6 +13,8 @@ namespace StudySpaceApp
             // Add services to the container.
             builder.Services.AddRazorPages();
 
+            builder.Services.AddSession();
+
             builder.Services.AddScoped<DBHelper>();
 
             builder.Services.AddScoped<IUserDAO, UserDAOImpl>();
@@ -32,6 +34,8 @@ namespace StudySpaceApp
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthorization();
 

@@ -5,8 +5,17 @@ namespace StudySpaceApp.Pages
 {
     public class DashboardModel : PageModel
     {
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            int? userId =
+                HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                return RedirectToPage("/Login");
+            }
+
+            return Page();
         }
     }
 }
