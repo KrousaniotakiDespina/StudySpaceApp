@@ -4,6 +4,6 @@ namespace StudySpaceApp.DAO
 {
     public interface IUserDAO
     {
-        User? GetUserByEmailAndPassword(string email, string password);
+        User? GetUserByEmail(string email);
     }
 }
