@@ -28,16 +28,37 @@
             <form method="post">
 
                 <div class="input-box">
-                    <img src="/images/icons/email.svg" alt="Email" />
-                    <input type="email" placeholder="Email address" />
+
+                    <img src="/images/icons/email.svg"
+                         alt="Email" />
+
+                    <input asp-for="LoginDTO.Email"
+                           type="email"
+                           placeholder="Email address" />
+
                 </div>
 
                 <div class="input-box">
-                    <img src="/images/icons/lock.svg" alt="Password" />
-                    <input type="password" placeholder="Password" />
+
+                    <img src="/images/icons/lock.svg"
+                         alt="Password" />
+
+                    <input asp-for="LoginDTO.Password"
+                           type="password"
+                           placeholder="Password" />
+
                 </div>
 
-                <button type="submit">Log In</button>
+                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    <p class="login-error">
+                        @Model.ErrorMessage
+                    </p>
+                }
+
+                <button type="submit">
+                    Log In
+                </button>
 
             </form>
 
