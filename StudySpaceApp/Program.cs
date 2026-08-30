@@ -1,3 +1,4 @@
+using StudySpaceApp.DAO;
 using StudySpaceApp.Helpers;
 
 namespace StudySpaceApp
@@ -12,6 +13,8 @@ namespace StudySpaceApp
             builder.Services.AddRazorPages();
 
             builder.Services.AddScoped<DBHelper>();
+
+            builder.Services.AddScoped<IUserDAO, UserDAOImpl>();
 
             var app = builder.Build();
 
