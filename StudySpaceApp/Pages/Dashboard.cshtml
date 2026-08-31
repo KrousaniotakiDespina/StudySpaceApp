@@ -155,57 +155,22 @@
 
                     <div class="todo-list">
 
-                        <div class="todo-item">
+                        @foreach (var task in Model.TodoTasks)
+                        {
+                            <div class="todo-item">
 
-                            <input type="checkbox" />
+                                <input type="checkbox"
+                                       checked="@task.IsCompleted" />
 
-                            <span>Push project files</span>
+                                <span>@task.Title</span>
 
-                            <button type="button"
-                                    class="delete-task-button">
-                                ×
-                            </button>
+                                <button type="button"
+                                        class="delete-task-button">
+                                    ×
+                                </button>
 
-                        </div>
-
-                        <div class="todo-item">
-
-                            <input type="checkbox" />
-
-                            <span>Chapter 5 exercises</span>
-
-                            <button type="button"
-                                    class="delete-task-button">
-                                ×
-                            </button>
-
-                        </div>
-
-                        <div class="todo-item">
-
-                            <input type="checkbox" />
-
-                            <span>Representation</span>
-
-                            <button type="button"
-                                    class="delete-task-button">
-                                ×
-                            </button>
-
-                        </div>
-
-                        <div class="todo-item">
-
-                            <input type="checkbox" />
-
-                            <span>Checkbox</span>
-
-                            <button type="button"
-                                    class="delete-task-button">
-                                ×
-                            </button>
-
-                        </div>
+                            </div>
+                        }
 
                     </div>
 
@@ -414,32 +379,39 @@
 
     <audio id="bell-sound" src="/audio/bell.mp3"></audio>
 
-    <div class="input-modal" id="input-modal">
+    <form method="post"
+          asp-page-handler="AddTask"
+          id="task-form">
 
-        <div class="input-modal-box">
+        <div class="input-modal" id="input-modal">
 
-            <h3 id="modal-title">Add</h3>
+            <div class="input-modal-box">
 
-            <textarea id="modal-input"
-                      placeholder="Write here..."></textarea>
+                <h3 id="modal-title">Add</h3>
 
-            <div class="modal-buttons">
+                <textarea id="modal-input"
+                          name="NewTaskTitle"
+                          placeholder="Write here..."></textarea>
 
-                <button type="button"
-                        id="modal-cancel">
-                    Cancel
-                </button>
+                <div class="modal-buttons">
 
-                <button type="button"
-                        id="modal-save">
-                    Add
-                </button>
+                    <button type="button"
+                            id="modal-cancel">
+                        Cancel
+                    </button>
+
+                    <button type="button"
+                            id="modal-save">
+                        Add
+                    </button>
+
+                </div>
 
             </div>
 
         </div>
 
-    </div>
+    </form>
 
     <script>
 
@@ -890,6 +862,9 @@
             const todoList =
                 document.querySelector(".todo-list");
 
+            const taskForm =
+                document.getElementById("task-form");
+
             let currentType = "";
 
             newNoteButton.addEventListener("click", () => {
@@ -980,46 +955,9 @@
 
                 if (currentType === "task") {
 
-                    const todoItem =
-                        document.createElement("div");
+                    taskForm.submit();
 
-                    todoItem.classList.add("todo-item");
-
-                    const checkbox =
-                        document.createElement("input");
-
-                    checkbox.type = "checkbox";
-
-                    const taskContent =
-                        document.createElement("span");
-
-                    taskContent.textContent = text;
-
-                    const deleteButton =
-                        document.createElement("button");
-
-                    deleteButton.type = "button";
-
-                    deleteButton.classList.add(
-                        "delete-task-button"
-                    );
-
-                    deleteButton.textContent = "×";
-
-                    deleteButton.addEventListener("click", () => {
-
-                        todoItem.remove();
-
-                    });
-
-                    todoItem.appendChild(checkbox);
-
-                    todoItem.appendChild(taskContent);
-
-                    todoItem.appendChild(deleteButton);
-
-                    todoList.appendChild(todoItem);
-
+                    return;
                 }
 
                 inputModal.classList.remove("show");
