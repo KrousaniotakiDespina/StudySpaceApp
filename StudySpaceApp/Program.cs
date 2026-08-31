@@ -19,7 +19,11 @@ namespace StudySpaceApp
 
             builder.Services.AddScoped<IUserDAO, UserDAOImpl>();
 
+            builder.Services.AddScoped<ITodoTaskDAO, TodoTaskDAOImpl>();
+
             builder.Services.AddScoped<IUserService, UserServiceImpl>();
+
+            builder.Services.AddScoped<ITodoTaskService, TodoTaskServiceImpl>();
 
             var app = builder.Build();
 
