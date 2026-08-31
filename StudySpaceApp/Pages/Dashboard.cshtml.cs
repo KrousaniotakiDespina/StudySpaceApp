@@ -62,6 +62,43 @@ namespace StudySpaceApp.Pages
             return RedirectToPage();
         }
 
+        public IActionResult OnPostDeleteTask(int id)
+        {
+            int? userId =
+                HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                return RedirectToPage("/Login");
+            }
+
+            _todoTaskService.Delete(
+                id,
+                userId.Value
+            );
+
+            return RedirectToPage();
+        }
+
+        public IActionResult OnPostUpdateTaskCompleted(int id, bool isCompleted)
+        {
+            int? userId =
+                HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                return RedirectToPage("/Login");
+            }
+
+            _todoTaskService.UpdateCompleted(
+                id,
+                userId.Value,
+                isCompleted
+            );
+
+            return RedirectToPage();
+        }
+
         public IActionResult OnPostLogout()
         {
             HttpContext.Session.Clear();

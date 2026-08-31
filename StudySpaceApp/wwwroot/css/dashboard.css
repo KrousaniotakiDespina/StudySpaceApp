@@ -459,11 +459,9 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.todo-item input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    accent-color: #6495ed;
-    cursor: pointer;
+.todo-item:has(input[type="checkbox"]:checked) > span {
+    text-decoration: line-through;
+    opacity: 0.7;
 }
 
 .todo-item input[type="checkbox"]:checked + span {

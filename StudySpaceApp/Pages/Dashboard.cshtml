@@ -159,15 +159,37 @@
                         {
                             <div class="todo-item">
 
-                                <input type="checkbox"
-                                       checked="@task.IsCompleted" />
+                                <form method="post"
+                                      asp-page-handler="UpdateTaskCompleted">
+
+                                    <input type="hidden"
+                                           name="id"
+                                           value="@task.Id" />
+
+                                    <input type="checkbox"
+                                           name="isCompleted"
+                                           value="true"
+                                           checked="@task.IsCompleted"
+                                           onchange="this.form.submit()" />
+
+                                    <input type="hidden"
+                                           name="isCompleted"
+                                           value="false" />
+
+                                </form>
 
                                 <span>@task.Title</span>
 
-                                <button type="button"
-                                        class="delete-task-button">
-                                    ×
-                                </button>
+                                <form method="post"
+                                      asp-page-handler="DeleteTask"
+                                      asp-route-id="@task.Id">
+
+                                    <button type="submit"
+                                            class="delete-task-button">
+                                        ×
+                                    </button>
+
+                                </form>
 
                             </div>
                         }
@@ -806,26 +828,6 @@
                         button.closest(".note-item");
 
                     noteItem.remove();
-
-                });
-
-            });
-
-    </script>
-
-    <script>
-
-            const deleteTaskButtons =
-                document.querySelectorAll(".delete-task-button");
-
-            deleteTaskButtons.forEach(button => {
-
-                button.addEventListener("click", () => {
-
-                    const taskItem =
-                        button.closest(".todo-item");
-
-                    taskItem.remove();
 
                 });
 
