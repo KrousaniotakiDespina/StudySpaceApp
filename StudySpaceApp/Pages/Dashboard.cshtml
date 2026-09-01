@@ -224,47 +224,30 @@
 
                     <div class="notes-list">
 
-                        <div class="note-item">
+                        @foreach (var note in Model.Notes)
+                        {
+                            <div class="note-item">
 
-                            <span>
-                                Read about dependency injection and take short notes on how it works.
-                                Connect each one with an example.
-                            </span>
+                                <span>
+                                    @note.Content
+                                </span>
 
-                            <button type="button"
-                                    class="delete-note-button">
-                                ×
-                            </button>
+                                <form method="post"
+                                      asp-page-handler="DeleteNote">
 
-                        </div>
+                                    <input type="hidden"
+                                           name="id"
+                                           value="@note.Id" />
 
-                        <div class="note-item">
+                                    <button type="submit"
+                                            class="delete-note-button">
+                                        ×
+                                    </button>
 
-                            <span>
-                                Practice Razor Pages by creating a simple form with validation.
-                                Check the data between the page model and the interface.
-                            </span>
+                                </form>
 
-                            <button type="button"
-                                    class="delete-note-button">
-                                ×
-                            </button>
-
-                        </div>
-
-                        <div class="note-item">
-
-                            <span>
-                                Read about HTTP methods and how applications communicate with a server.
-                                Take short notes on GET, POST, PUT, and DELETE.
-                            </span>
-
-                            <button type="button"
-                                    class="delete-note-button">
-                                ×
-                            </button>
-
-                        </div>
+                            </div>
+                        }
 
                     </div>
 
@@ -412,8 +395,16 @@
                 <h3 id="modal-title">Add</h3>
 
                 <textarea id="modal-input"
-                          name="NewTaskTitle"
-                          placeholder="Write here..."></textarea>
+                          placeholder="Write here...">
+                </textarea>
+
+                <input type="hidden"
+                       id="task-title-input"
+                       name="NewTaskTitle" />
+
+                <input type="hidden"
+                       id="note-content-input"
+                       name="NewNoteContent" />
 
                 <div class="modal-buttons">
 
@@ -769,7 +760,6 @@
             const dashboardPage =
                 document.querySelector(".dashboard-page");
 
-
             const savedTheme =
                 localStorage.getItem("selectedTheme");
 
@@ -788,13 +778,11 @@
                     const selectedTheme =
                         button.getAttribute("data-theme");
 
-
                     dashboardPage.classList.remove(
                         "pink-theme",
                         "green-theme",
                         "gray-theme"
                     );
-
 
                     if (selectedTheme !== "blue") {
 
@@ -827,8 +815,6 @@
                     const noteItem =
                         button.closest(".note-item");
 
-                    noteItem.remove();
-
                 });
 
             });
@@ -842,6 +828,9 @@
 
             const addTaskButton =
                 document.getElementById("add-task-button");
+
+            const taskTitleInput =
+                document.getElementById("task-title-input");
 
             const inputModal =
                 document.getElementById("input-modal");
@@ -860,6 +849,9 @@
 
             const notesList =
                 document.querySelector(".notes-list");
+
+            const noteContentInput =
+                document.getElementById("note-content-input");
 
             const todoList =
                 document.querySelector(".todo-list");
@@ -920,42 +912,22 @@
 
                 if (currentType === "note") {
 
-                    const noteItem =
-                        document.createElement("div");
+                    noteContentInput.value = text;
 
-                    noteItem.classList.add("note-item");
+                    taskForm.action =
+                        "?handler=AddNote";
 
-                    const noteContent =
-                        document.createElement("span");
+                    taskForm.submit();
 
-                    noteContent.textContent = text;
-
-                    const deleteButton =
-                        document.createElement("button");
-
-                    deleteButton.type = "button";
-
-                    deleteButton.classList.add(
-                        "delete-note-button"
-                    );
-
-                    deleteButton.textContent = "×";
-
-                    deleteButton.addEventListener("click", () => {
-
-                        noteItem.remove();
-
-                    });
-
-                    noteItem.appendChild(noteContent);
-
-                    noteItem.appendChild(deleteButton);
-
-                    notesList.appendChild(noteItem);
-
+                    return;
                 }
 
                 if (currentType === "task") {
+
+                    taskTitleInput.value = text;
+
+                    taskForm.action =
+                        "?handler=AddTask";
 
                     taskForm.submit();
 
