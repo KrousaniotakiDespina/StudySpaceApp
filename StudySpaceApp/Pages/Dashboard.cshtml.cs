@@ -26,6 +26,8 @@ namespace StudySpaceApp.Pages
         [BindProperty]
         public string NewNoteContent { get; set; } = null!;
 
+        public string Firstname { get; set; } = null!;
+
         public IActionResult OnGet()
         {
             int? userId =
@@ -35,6 +37,9 @@ namespace StudySpaceApp.Pages
             {
                 return RedirectToPage("/Login");
             }
+
+            Firstname =
+                HttpContext.Session.GetString("Firstname") ?? "";
 
             TodoTasks =
                 _todoTaskService.GetAllByUserId(userId.Value);
