@@ -8,16 +8,23 @@ namespace StudySpaceApp.Pages
     public class DashboardModel : PageModel
     {
         private readonly ITodoTaskService _todoTaskService;
+        private readonly INoteService _noteService;
 
-        public DashboardModel(ITodoTaskService todoTaskService)
+        public DashboardModel(ITodoTaskService todoTaskService, INoteService noteService)
         {
             _todoTaskService = todoTaskService;
+            _noteService = noteService;
         }
 
         public List<TodoTaskReadOnlyDTO> TodoTasks { get; set; } = new();
 
         [BindProperty]
         public string NewTaskTitle { get; set; } = null!;
+
+        public List<NoteReadOnlyDTO> Notes { get; set; } = new();
+
+        [BindProperty]
+        public string NewNoteContent { get; set; } = null!;
 
         public IActionResult OnGet()
         {
@@ -31,6 +38,8 @@ namespace StudySpaceApp.Pages
 
             TodoTasks =
                 _todoTaskService.GetAllByUserId(userId.Value);
+            Notes =
+                _noteService.GetAllByUserId(userId.Value);
 
             return Page();
         }
@@ -94,6 +103,51 @@ namespace StudySpaceApp.Pages
                 id,
                 userId.Value,
                 isCompleted
+            );
+
+            return RedirectToPage();
+        }
+
+        public IActionResult OnPostAddNote()
+        {
+            int? userId =
+                HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                return RedirectToPage("/Login");
+            }
+
+            if (string.IsNullOrWhiteSpace(NewNoteContent))
+            {
+                return RedirectToPage();
+            }
+
+            NoteInsertDTO insertDTO =
+                new NoteInsertDTO
+                {
+                    Content = NewNoteContent.Trim(),
+                    UserId = userId.Value
+                };
+
+            _noteService.Insert(insertDTO);
+
+            return RedirectToPage();
+        }
+
+        public IActionResult OnPostDeleteNote(int id)
+        {
+            int? userId =
+                HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                return RedirectToPage("/Login");
+            }
+
+            _noteService.Delete(
+                id,
+                userId.Value
             );
 
             return RedirectToPage();
