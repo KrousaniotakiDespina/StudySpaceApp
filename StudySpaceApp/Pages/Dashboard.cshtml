@@ -182,7 +182,11 @@
 
                                 <form method="post"
                                       asp-page-handler="DeleteTask"
-                                      asp-route-id="@task.Id">
+                                      class="delete-task-form">
+
+                                    <input type="hidden"
+                                           name="id"
+                                           value="@task.Id" />
 
                                     <button type="submit"
                                             class="delete-task-button">
@@ -937,6 +941,43 @@
                 inputModal.classList.remove("show");
 
                 modalInput.value = "";
+
+            });
+
+    </script>
+
+    <script>
+
+            const deleteTaskForms =
+                document.querySelectorAll(".delete-task-form");
+
+            deleteTaskForms.forEach(form => {
+
+                form.addEventListener("submit", async (event) => {
+
+                    event.preventDefault();
+
+                    const response =
+                        await fetch(form.action, {
+                            method: "POST",
+                            body: new FormData(form)
+                        });
+
+                    if (response.ok) {
+
+                        const result =
+                            await response.json();
+
+                        if (result.success) {
+
+                            const taskItem =
+                                form.closest(".todo-item");
+
+                            taskItem.remove();
+                        }
+                    }
+
+                });
 
             });
 

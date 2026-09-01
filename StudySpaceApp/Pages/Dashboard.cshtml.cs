@@ -83,15 +83,18 @@ namespace StudySpaceApp.Pages
 
             if (userId == null)
             {
-                return RedirectToPage("/Login");
+                return Unauthorized();
             }
 
-            _todoTaskService.Delete(
-                id,
-                userId.Value
-            );
+            bool deleted =
+                _todoTaskService.Delete(
+                    id,
+                    userId.Value
+                );
 
-            return RedirectToPage();
+            return new JsonResult(
+                new { success = deleted }
+            );
         }
 
         public IActionResult OnPostUpdateTaskCompleted(int id, bool isCompleted)
