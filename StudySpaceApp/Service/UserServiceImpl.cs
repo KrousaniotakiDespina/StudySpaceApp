@@ -1,4 +1,5 @@
-﻿using StudySpaceApp.DAO;
+﻿using Microsoft.AspNetCore.Identity;
+using StudySpaceApp.DAO;
 using StudySpaceApp.DTO;
 using StudySpaceApp.Models;
 
@@ -7,10 +8,14 @@ namespace StudySpaceApp.Service
     public class UserServiceImpl : IUserService
     {
         private readonly IUserDAO _userDAO;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
-        public UserServiceImpl(IUserDAO userDAO)
+        public UserServiceImpl(
+            IUserDAO userDAO,
+            IPasswordHasher<User> passwordHasher)
         {
             _userDAO = userDAO;
+            _passwordHasher = passwordHasher;
         }
 
         public UserReadOnlyDTO? Login(UserLoginDTO loginDTO)
@@ -22,7 +27,14 @@ namespace StudySpaceApp.Service
                 return null;
             }
 
-            if (user.Password != loginDTO.Password)
+            PasswordVerificationResult result =
+                _passwordHasher.VerifyHashedPassword(
+                    user,
+                    user.Password,
+                    loginDTO.Password
+                );
+
+            if (result == PasswordVerificationResult.Failed)
             {
                 return null;
             }
