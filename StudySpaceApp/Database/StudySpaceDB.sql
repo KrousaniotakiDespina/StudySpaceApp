@@ -1,0 +1,42 @@
+﻿CREATE DATABASE StudySpaceDB;
+GO
+
+USE StudySpaceDB;
+GO
+
+CREATE TABLE Users
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Firstname NVARCHAR(50) NOT NULL,
+    Lastname NVARCHAR(50) NOT NULL,
+    Email NVARCHAR(100) NOT NULL UNIQUE,
+    Password NVARCHAR(255) NOT NULL,
+    Theme NVARCHAR(20) NOT NULL DEFAULT 'blue'
+);
+GO
+
+CREATE TABLE TodoTasks
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Title NVARCHAR(255) NOT NULL,
+    IsCompleted BIT NOT NULL DEFAULT 0,
+    UserId INT NOT NULL,
+
+    CONSTRAINT FK_TodoTasks_Users
+        FOREIGN KEY (UserId)
+        REFERENCES Users(Id)
+);
+GO
+
+CREATE TABLE Notes
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Content NVARCHAR(MAX) NOT NULL,
+    CreatedAt DATETIME2 NOT NULL DEFAULT GETDATE(),
+    UserId INT NOT NULL,
+
+    CONSTRAINT FK_Notes_Users
+        FOREIGN KEY (UserId)
+        REFERENCES Users(Id)
+);
+GO
