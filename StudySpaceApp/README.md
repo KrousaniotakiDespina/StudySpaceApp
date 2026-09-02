@@ -16,9 +16,11 @@ and customizable themes in a single personal dashboard.
 
 ## Preview
 
-![StudySpace Login](docs/images/login.png)
+### Login
+![StudySpace Login](wwwroot/images/login.png)
 
-![StudySpace Dashboard](docs/images/dashboard.png)
+### Dashboard
+![StudySpace Dashboard](wwwroot/images/dashboard.png)
 
 ## Features
 
