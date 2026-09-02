@@ -20,7 +20,10 @@ and customizable themes in a single personal dashboard.
 <img src="wwwroot/images/login.png" width="500">
 
 ### Dashboard
-<img src="wwwroot/images/dashboard.png" width="700">
+<img src="wwwroot/images/blue-dashboard.png" width="500">
+<img src="wwwroot/images/pink-dashboard.png" width="500">
+<img src="wwwroot/images/green-dashboard.png" width="500">
+<img src="wwwroot/images/gray-dashboard.png" width="500">
 
 ## Features
 
