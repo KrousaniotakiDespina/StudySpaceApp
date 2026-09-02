@@ -17,10 +17,10 @@ and customizable themes in a single personal dashboard.
 ## Preview
 
 ### Login
-![StudySpace Login](wwwroot/images/login.png)
+<img src="wwwroot/images/login.png" width="500">
 
 ### Dashboard
-![StudySpace Dashboard](wwwroot/images/dashboard.png)
+<img src="wwwroot/images/dashboard.png" width="700">
 
 ## Features
 
