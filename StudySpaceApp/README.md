@@ -14,6 +14,12 @@ and customizable themes in a single personal dashboard.
 - **Email:** `demo@studyspace.app`
 - **Password:** `StudySpace_Test_9284!`
 
+## Preview
+
+![StudySpace Login](docs/images/login.png)
+
+![StudySpace Dashboard](docs/images/dashboard.png)
+
 ## Features
 
 ### Productivity Tools
@@ -27,18 +33,19 @@ and customizable themes in a single personal dashboard.
 - **Dynamic Calendar** - Navigate through previous and next months
 - **Multiple Visual Themes** - Customize the interface to your preference
 
-### Security & Data
-- **Secure Authentication** - User login with hashed password verification
-- **Session Management** - Secure session-based authentication
-- **Persistent Storage** - All data backed by SQL Server
-- **Personal Dashboards** - Isolated data for each user
+### Authentication & Data
+- **Authentication** - User login with hashed password verification
+- **Session Management** - Session-based access to the personal dashboard
+- **Persistent Storage** - Tasks and notes stored in SQL Server
+- **Personal Dashboards** - Tasks and notes are associated with each user's account
 
 ## Technologies
 
-- **Backend**: C#, ASP.NET Core (.NET 10), Razor Pages
-- **Database**: SQL Server, ADO.NET
-- **Frontend**: HTML, CSS, JavaScript
-- **Version Control**: Git, GitHub
+- **Backend:** C#, ASP.NET Core (.NET 10), Razor Pages
+- **Database:** SQL Server, ADO.NET
+- **Frontend:** HTML, CSS, JavaScript
+- **Cloud:** Azure App Service, Azure SQL Database
+- **Version Control:** Git, GitHub
 
 ## Architecture
 
