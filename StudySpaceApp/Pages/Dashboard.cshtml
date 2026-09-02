@@ -21,7 +21,14 @@
 <body>
     <div class="dashboard-page">
 
-        <aside class="sidebar">
+        <button type="button"
+                class="mobile-menu-btn"
+                id="mobile-menu-btn"
+                aria-label="Open menu">
+            ☰
+        </button>
+
+        <aside class="sidebar" id="sidebar">
 
             <h1>StudySpace</h1>
 
@@ -1115,6 +1122,20 @@
 
             });
 
+    </script>
+
+    <!-- MOBILE SIDEBAR -->
+
+    <script>
+            const mobileMenuBtn =
+                document.getElementById("mobile-menu-btn");
+
+            const sidebar =
+                document.getElementById("sidebar");
+
+            mobileMenuBtn.addEventListener("click", () => {
+                sidebar.classList.toggle("open");
+            });
     </script>
 
 </body>
