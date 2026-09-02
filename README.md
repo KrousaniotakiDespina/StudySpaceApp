@@ -20,8 +20,8 @@ and customizable themes in a single personal dashboard.
 <img src="StudySpaceApp/wwwroot/images/login.png" width="500">
 
 ### Dashboard
-<img src="StudySpaceApp/wwwroot/images/blue-dashboard.png" width="500"> <img src="StudySpaceApp/wwwroot/images/pink-dashboard.png" width="500">
-<img src="StudySpaceApp/wwwroot/images/green-dashboard.png" width="500"> <img src="StudySpaceApp/wwwroot/images/gray-dashboard.png" width="500">
+<img src="StudySpaceApp/wwwroot/images/blue-dashboard.png" width="350"> <img src="StudySpaceApp/wwwroot/images/pink-dashboard.png" width="350">
+<img src="StudySpaceApp/wwwroot/images/green-dashboard.png" width="350"> <img src="StudySpaceApp/wwwroot/images/gray-dashboard.png" width="350">
 
 ## Features
 
