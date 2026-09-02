@@ -5,6 +5,15 @@ StudySpace is a full-stack study productivity application built with **ASP.NET C
 The application combines task management, notes, a Pomodoro timer, calendar navigation, background audio, 
 and customizable themes in a single personal dashboard.
 
+## Live Demo
+
+[Open StudySpace](https://studyspace-despoina-bydpeehdbeahgsec.francecentral-01.azurewebsites.net)
+
+### Demo Account
+
+- **Email:** `demo@studyspace.app`
+- **Password:** `StudySpace_Test_9284!`
+
 ## Features
 
 ### Productivity Tools
