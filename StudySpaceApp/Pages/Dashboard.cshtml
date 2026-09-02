@@ -148,7 +148,7 @@
                         <button type="button"
                                 class="small-button"
                                 id="add-task-button">
-                                + Add task
+                            + Add task
                         </button>
 
                     </div>
@@ -160,7 +160,8 @@
                             <div class="todo-item">
 
                                 <form method="post"
-                                      asp-page-handler="UpdateTaskCompleted">
+                                      asp-page-handler="UpdateTaskCompleted"
+                                      class="update-task-form">
 
                                     <input type="hidden"
                                            name="id"
@@ -170,7 +171,7 @@
                                            name="isCompleted"
                                            value="true"
                                            checked="@task.IsCompleted"
-                                           onchange="this.form.submit()" />
+                                           class="task-checkbox" />
 
                                     <input type="hidden"
                                            name="isCompleted"
@@ -188,7 +189,7 @@
                                            name="id"
                                            value="@task.Id" />
 
-                                    <button type="submit"
+                                    <button type="button"
                                             class="delete-task-button">
                                         ×
                                     </button>
@@ -221,7 +222,7 @@
                         <button type="button"
                                 class="small-button"
                                 id="new-note-button">
-                                + New Note
+                            + New Note
                         </button>
 
                     </div>
@@ -237,13 +238,14 @@
                                 </span>
 
                                 <form method="post"
-                                      asp-page-handler="DeleteNote">
+                                      asp-page-handler="DeleteNote"
+                                      class="delete-note-form">
 
                                     <input type="hidden"
                                            name="id"
                                            value="@note.Id" />
 
-                                    <button type="submit"
+                                    <button type="button"
                                             class="delete-note-button">
                                         ×
                                     </button>
@@ -430,6 +432,8 @@
 
     </form>
 
+    <!-- MUSIC -->
+
     <script>
 
             const musicButtons = document.querySelectorAll(".music-button");
@@ -501,6 +505,8 @@
             });
 
     </script>
+
+    <!-- TIMER -->
 
     <script>
 
@@ -629,6 +635,8 @@
 
     </script>
 
+    <!-- CALENDAR -->
+
     <script>
 
             const calendarGrid =
@@ -756,6 +764,8 @@
 
     </script>
 
+    <!-- THEMES -->
+
     <script>
 
             const themeButtons =
@@ -807,23 +817,7 @@
 
     </script>
 
-    <script>
-
-            const deleteNoteButtons =
-                document.querySelectorAll(".delete-note-button");
-
-            deleteNoteButtons.forEach(button => {
-
-                button.addEventListener("click", () => {
-
-                    const noteItem =
-                        button.closest(".note-item");
-
-                });
-
-            });
-
-    </script>
+    <!-- ADD TASK / NOTE MODAL -->
 
     <script>
 
@@ -905,7 +899,7 @@
 
             });
 
-            modalSave.addEventListener("click", () => {
+            modalSave.addEventListener("click", async () => {
 
                 const text =
                     modalInput.value.trim();
@@ -914,33 +908,129 @@
                     return;
                 }
 
+                const formData =
+                    new FormData(taskForm);
+
                 if (currentType === "note") {
 
-                    noteContentInput.value = text;
+                    formData.set(
+                        "NewNoteContent",
+                        text
+                    );
 
-                    taskForm.action =
-                        "?handler=AddNote";
+                    const response =
+                        await fetch("?handler=AddNote", {
+                            method: "POST",
+                            body: formData
+                        });
 
-                    taskForm.submit();
+                    if (response.ok) {
+
+                        const newNote =
+                            await response.json();
+
+                        const noteItem =
+                            document.createElement("div");
+
+                        noteItem.classList.add("note-item");
+
+                        noteItem.innerHTML = `
+                            <span>${newNote.content}</span>
+
+                            <form method="post"
+                                  action="?handler=DeleteNote"
+                                  class="delete-note-form">
+
+                                <input type="hidden"
+                                       name="id"
+                                       value="${newNote.id}" />
+
+                                <button type="button"
+                                        class="delete-note-button">
+                                    ×
+                                </button>
+
+                            </form>
+                        `;
+
+                        notesList.prepend(noteItem);
+
+                        inputModal.classList.remove("show");
+                        modalInput.value = "";
+                    }
 
                     return;
                 }
 
                 if (currentType === "task") {
 
-                    taskTitleInput.value = text;
+                    formData.set(
+                        "NewTaskTitle",
+                        text
+                    );
 
-                    taskForm.action =
-                        "?handler=AddTask";
+                    const response =
+                        await fetch("?handler=AddTask", {
+                            method: "POST",
+                            body: formData
+                        });
 
-                    taskForm.submit();
+                    if (response.ok) {
+
+                        const newTask =
+                            await response.json();
+
+                        const taskItem =
+                            document.createElement("div");
+
+                        taskItem.classList.add("todo-item");
+
+                        taskItem.innerHTML = `
+                            <form method="post"
+                                  action="?handler=UpdateTaskCompleted"
+                                  class="update-task-form">
+
+                                <input type="hidden"
+                                       name="id"
+                                       value="${newTask.id}" />
+
+                                <input type="checkbox"
+                                       name="isCompleted"
+                                       value="true"
+                                       class="task-checkbox" />
+
+                                <input type="hidden"
+                                       name="isCompleted"
+                                       value="false" />
+
+                            </form>
+
+                            <span>${newTask.title}</span>
+
+                            <form method="post"
+                                  action="?handler=DeleteTask"
+                                  class="delete-task-form">
+
+                                <input type="hidden"
+                                       name="id"
+                                       value="${newTask.id}" />
+
+                                <button type="button"
+                                        class="delete-task-button">
+                                    ×
+                                </button>
+
+                            </form>
+                        `;
+
+                        todoList.prepend(taskItem);
+
+                        inputModal.classList.remove("show");
+                        modalInput.value = "";
+                    }
 
                     return;
                 }
-
-                inputModal.classList.remove("show");
-
-                modalInput.value = "";
 
             });
 
@@ -948,36 +1038,80 @@
 
     <script>
 
-            const deleteTaskForms =
-                document.querySelectorAll(".delete-task-form");
+            document.addEventListener("click", async (event) => {
 
-            deleteTaskForms.forEach(form => {
+                const deleteTaskButton =
+                    event.target.closest(".delete-task-button");
 
-                form.addEventListener("submit", async (event) => {
+                if (deleteTaskButton) {
 
-                    event.preventDefault();
+                    const form =
+                        deleteTaskButton.closest(".delete-task-form");
+
+                    const formData =
+                        new FormData(form);
+
+                    const token =
+                        document.querySelector(
+                            'input[name="__RequestVerificationToken"]'
+                        ).value;
+
+                    formData.set(
+                        "__RequestVerificationToken",
+                        token
+                    );
 
                     const response =
                         await fetch(form.action, {
                             method: "POST",
-                            body: new FormData(form)
+                            body: formData
                         });
 
-                    if (response.ok) {
+                    const result =
+                        await response.json();
 
-                        const result =
-                            await response.json();
-
-                        if (result.success) {
-
-                            const taskItem =
-                                form.closest(".todo-item");
-
-                            taskItem.remove();
-                        }
+                    if (result.success) {
+                        form.closest(".todo-item").remove();
                     }
 
-                });
+                    return;
+                }
+
+
+                const deleteNoteButton =
+                    event.target.closest(".delete-note-button");
+
+                if (deleteNoteButton) {
+
+                    const form =
+                        deleteNoteButton.closest(".delete-note-form");
+
+                    const formData =
+                        new FormData(form);
+
+                    const token =
+                        document.querySelector(
+                            'input[name="__RequestVerificationToken"]'
+                        ).value;
+
+                    formData.set(
+                        "__RequestVerificationToken",
+                        token
+                    );
+
+                    const response =
+                        await fetch(form.action, {
+                            method: "POST",
+                            body: formData
+                        });
+
+                    const result =
+                        await response.json();
+
+                    if (result.success) {
+                        form.closest(".note-item").remove();
+                    }
+                }
 
             });
 

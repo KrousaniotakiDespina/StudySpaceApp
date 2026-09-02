@@ -56,12 +56,12 @@ namespace StudySpaceApp.Pages
 
             if (userId == null)
             {
-                return RedirectToPage("/Login");
+                return Unauthorized();
             }
 
             if (string.IsNullOrWhiteSpace(NewTaskTitle))
             {
-                return RedirectToPage();
+                return BadRequest();
             }
 
             TodoTaskInsertDTO insertDTO =
@@ -71,9 +71,22 @@ namespace StudySpaceApp.Pages
                     UserId = userId.Value
                 };
 
-            _todoTaskService.Insert(insertDTO);
+            TodoTaskReadOnlyDTO? newTask =
+                _todoTaskService.Insert(insertDTO);
 
-            return RedirectToPage();
+            if (newTask == null)
+            {
+                return BadRequest();
+            }
+
+            return new JsonResult(
+                new
+                {
+                    id = newTask.Id,
+                    title = newTask.Title,
+                    isCompleted = newTask.IsCompleted
+                }
+            );
         }
 
         public IActionResult OnPostDeleteTask(int id)
@@ -97,23 +110,28 @@ namespace StudySpaceApp.Pages
             );
         }
 
-        public IActionResult OnPostUpdateTaskCompleted(int id, bool isCompleted)
+        public IActionResult OnPostUpdateTaskCompleted(
+            int id,
+            bool isCompleted)
         {
             int? userId =
                 HttpContext.Session.GetInt32("UserId");
 
             if (userId == null)
             {
-                return RedirectToPage("/Login");
+                return Unauthorized();
             }
 
-            _todoTaskService.UpdateCompleted(
-                id,
-                userId.Value,
-                isCompleted
-            );
+            bool updated =
+                _todoTaskService.UpdateCompleted(
+                    id,
+                    userId.Value,
+                    isCompleted
+                );
 
-            return RedirectToPage();
+            return new JsonResult(
+                new { success = updated }
+            );
         }
 
         public IActionResult OnPostAddNote()
@@ -123,12 +141,12 @@ namespace StudySpaceApp.Pages
 
             if (userId == null)
             {
-                return RedirectToPage("/Login");
+                return Unauthorized();
             }
 
             if (string.IsNullOrWhiteSpace(NewNoteContent))
             {
-                return RedirectToPage();
+                return BadRequest();
             }
 
             NoteInsertDTO insertDTO =
@@ -138,9 +156,21 @@ namespace StudySpaceApp.Pages
                     UserId = userId.Value
                 };
 
-            _noteService.Insert(insertDTO);
+            NoteReadOnlyDTO? newNote =
+                _noteService.Insert(insertDTO);
 
-            return RedirectToPage();
+            if (newNote == null)
+            {
+                return BadRequest();
+            }
+
+            return new JsonResult(
+                new
+                {
+                    id = newNote.Id,
+                    content = newNote.Content
+                }
+            );
         }
 
         public IActionResult OnPostDeleteNote(int id)
@@ -150,15 +180,18 @@ namespace StudySpaceApp.Pages
 
             if (userId == null)
             {
-                return RedirectToPage("/Login");
+                return Unauthorized();
             }
 
-            _noteService.Delete(
-                id,
-                userId.Value
-            );
+            bool deleted =
+                _noteService.Delete(
+                    id,
+                    userId.Value
+                );
 
-            return RedirectToPage();
+            return new JsonResult(
+                new { success = deleted }
+            );
         }
 
         public IActionResult OnPostLogout()

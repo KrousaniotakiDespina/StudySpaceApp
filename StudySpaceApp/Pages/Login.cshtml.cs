@@ -18,13 +18,10 @@ namespace StudySpaceApp.Pages
 
         public string? ErrorMessage { get; set; }
 
-        public void OnGet()
-        {
-        }
-
         public IActionResult OnPost()
         {
-            var user = _userService.Login(LoginDTO);
+            UserReadOnlyDTO? user =
+                _userService.Login(LoginDTO);
 
             if (user == null)
             {

@@ -1,4 +1,6 @@
-﻿body {
+﻿/* PAGE */
+
+body {
     margin: 0;
     min-height: 100vh;
     background-image: url('/images/loginBackground.png');
@@ -17,6 +19,8 @@
     justify-content: center;
     align-items: center;
 }
+
+/* LOGIN CARD */
 
 .login-card {
     width: 340px;
@@ -57,6 +61,8 @@
     flex-direction: column;
 }
 
+/* INPUTS */
+
 .input-box {
     width: 100%;
     height: 46px;
@@ -78,7 +84,7 @@
     height: 22px;
     margin-right: 14px;
     filter: brightness(0) invert(1);
-    }
+}
 
 .input-box input {
     color: white;
@@ -86,13 +92,14 @@
     background: transparent;
     border: none;
     outline: none;
-    font-size: 15px;
 }
 
 .input-box input::placeholder {
     color: white;
     opacity: 0.9;
 }
+
+/* LOGIN BUTTON */
 
 .login-card button {
     width: 100%;
@@ -109,6 +116,8 @@
 .login-card button:hover {
     opacity: 0.9;
 }
+
+/* AUTOFILL */
 
 .input-box input:-webkit-autofill {
     -webkit-text-fill-color: white;

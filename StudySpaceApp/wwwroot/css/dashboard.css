@@ -1,4 +1,6 @@
-﻿:root {
+﻿/* THEME VARIABLES */
+
+:root {
     --page-left: #8db2f7;
     --page-right: #9eb8f8;
     --page-center-dark: #3c1bc9;
@@ -34,16 +36,24 @@
     --card-bg: rgba(210, 210, 210, 0.18);
 }
 
+/* GENERAL */
+
 body {
     margin: 0;
     min-height: 100vh;
     font-family: Georgia, serif;
 }
 
+/* PAGE LAYOUT */
+
 .dashboard-page {
     min-height: 100vh;
     display: flex;
-    background: radial-gradient( circle at center, var(--page-center-dark) 0%, var(--page-center-mid) 24%, rgba(0, 0, 0, 0) 52% ), linear-gradient( 135deg, var(--page-left) 0%, var(--page-right) 100% );
+    background: radial-gradient( circle at center, 
+                var(--page-center-dark) 20%, 
+                var(--page-center-mid) 35%, rgba(0, 0, 0, 0) 78% ), 
+                linear-gradient( 135deg, var(--page-left) 0%, 
+                var(--page-right) 100% );
 }
 
 /* SIDEBAR */
@@ -197,6 +207,8 @@ body {
 .todo-card {
     flex: 1;
     height: 330px;
+    display: flex;
+    flex-direction: column;
 }
 
 .notes-card {
@@ -209,6 +221,8 @@ body {
 .timer-card {
     flex: 0.9;
     height: 365px;
+    display: flex;
+    flex-direction: column;
 }
 
 .music-card {
@@ -237,6 +251,8 @@ body {
     cursor: pointer;
     font-size: 17px;
 }
+
+/* MODAL */
 
 .input-modal {
     position: fixed;
@@ -420,9 +436,15 @@ body {
 }
 
 .todo-list {
-    margin-top: 25px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: 6px;
 }
-
 .todo-item {
     min-height: 45px;
     display: flex;
@@ -460,11 +482,6 @@ body {
 }
 
 .todo-item:has(input[type="checkbox"]:checked) > span {
-    text-decoration: line-through;
-    opacity: 0.7;
-}
-
-.todo-item input[type="checkbox"]:checked + span {
     text-decoration: line-through;
     opacity: 0.7;
 }
@@ -531,25 +548,23 @@ body {
     opacity: 1;
 }
 
-.notes-list::-webkit-scrollbar {
+.notes-list::-webkit-scrollbar,
+.todo-list::-webkit-scrollbar {
     width: 6px;
 }
 
-.notes-list::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.45);
+.notes-list::-webkit-scrollbar-thumb,
+.todo-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.45);
     border-radius: 10px;
 }
 
-.notes-list::-webkit-scrollbar-track {
+.notes-list::-webkit-scrollbar-track,
+.todo-list::-webkit-scrollbar-track {
     background: transparent;
 }
 
 /* TIMER */
-
-.timer-card {
-    display: flex;
-    flex-direction: column;
-}
 
 .timer-heading {
     display: flex;
@@ -767,10 +782,6 @@ body {
 /* RESPONSIVE */
 
 @media (max-width: 900px) {
-
-    .dashboard-page {
-        flex-direction: row;
-    }
 
     .sidebar {
         width: 120px;

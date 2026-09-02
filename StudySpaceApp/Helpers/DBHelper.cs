@@ -16,6 +16,13 @@ namespace StudySpaceApp.Helpers
             string? connectionString =
                 _configuration.GetConnectionString("DefaultConnection");
 
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                throw new InvalidOperationException(
+                    "Database connection string was not found."
+                );
+            }
+
             return new SqlConnection(connectionString);
         }
     }
