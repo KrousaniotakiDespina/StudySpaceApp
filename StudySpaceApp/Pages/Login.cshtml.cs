@@ -20,27 +20,24 @@ namespace StudySpaceApp.Pages
 
         public IActionResult OnPost()
         {
-            UserReadOnlyDTO? user =
-                _userService.Login(LoginDTO);
+            if (string.IsNullOrWhiteSpace(LoginDTO.Email) ||
+                string.IsNullOrWhiteSpace(LoginDTO.Password))
+            {
+                ErrorMessage = "Please enter your email and password.";
+                return Page();
+            }
+
+            UserReadOnlyDTO? user = _userService.Login(LoginDTO);
 
             if (user == null)
             {
                 ErrorMessage = "Invalid email or password.";
-
                 return Page();
             }
 
             HttpContext.Session.SetInt32("UserId", user.Id);
-
-            HttpContext.Session.SetString(
-                "Firstname",
-                user.Firstname
-            );
-
-            HttpContext.Session.SetString(
-                "Theme",
-                user.Theme
-            );
+            HttpContext.Session.SetString("Firstname", user.Firstname);
+            HttpContext.Session.SetString("Theme", user.Theme);
 
             return RedirectToPage("/Dashboard");
         }
