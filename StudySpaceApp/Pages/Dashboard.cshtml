@@ -1043,6 +1043,8 @@
 
     </script>
 
+    <!-- Delete Task / Note -->
+
     <script>
 
             document.addEventListener("click", async (event) => {
@@ -1118,6 +1120,53 @@
                     if (result.success) {
                         form.closest(".note-item").remove();
                     }
+                }
+
+            });
+
+    </script>
+
+    <!-- UPDATE TASK COMPLETED -->
+
+    <script>
+
+            document.addEventListener("change", async (event) => {
+
+                if (!event.target.classList.contains("task-checkbox")) {
+                    return;
+                }
+
+                const checkbox = event.target;
+
+                const form =
+                    checkbox.closest(".update-task-form");
+
+                const formData =
+                    new FormData(form);
+
+                formData.set(
+                    "isCompleted",
+                    checkbox.checked
+                );
+
+                const token =
+                    document.querySelector(
+                        'input[name="__RequestVerificationToken"]'
+                    ).value;
+
+                formData.set(
+                    "__RequestVerificationToken",
+                    token
+                );
+
+                const response =
+                    await fetch(form.action, {
+                        method: "POST",
+                        body: formData
+                    });
+
+                if (!response.ok) {
+                    console.error("Task completion update failed.");
                 }
 
             });
