@@ -11,7 +11,7 @@ and customizable themes in a single personal dashboard.
 
 ### Demo Account
 
-- **Email:** `demo@studyspace.app`
+- **Email:** `test@test.com`
 - **Password:** `StudySpace_Test_9284!`
 
 ## Preview
