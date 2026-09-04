@@ -109,56 +109,132 @@ StudySpaceApp/
 ## Getting Started
 
 ### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/KrousaniotakiDespina/StudySpaceApp.git
 cd StudySpaceApp
 ```
 
 ### 2. Set Up the Database
+
 1. Open SQL Server Management Studio (SSMS).
 2. Open `Database/StudySpaceDB.sql`.
 3. Execute the script.
 4. Confirm that the `StudySpaceDB` database and the `Users`, `TodoTasks`, and `Notes` tables have been created.
 
 ### 3. Configure Connection String
+
 Configure the `DefaultConnection` using .NET User Secrets:
+
 ```bash
 dotnet user-secrets init
 dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=YOUR_SERVER;Database=StudySpaceDB;User Id=YOUR_USER;Password=YOUR_PASSWORD;TrustServerCertificate=True;"
 ```
 
-### 4. Build and Run
+### 4. Run the Application
+
+Restore dependencies:
+
 ```bash
-# Restore dependencies
 dotnet restore
+```
 
-# Build the project
+Build the project:
+
+```bash
 dotnet build
+```
 
-# Run the application
+Run the application:
+
+```bash
 dotnet run
 ```
 
-### 5. Access the Application
 Open the local URL shown by ASP.NET Core in Visual Studio or the terminal.
 
 To log in, use a valid user account that exists in the `Users` table.
 
+## Deployment
+
+The application can be deployed to any hosting environment that supports ASP.NET Core and SQL Server.
+
+### 1. Create a Production Build
+
+Build the application in Release mode:
+
+```bash
+dotnet build --configuration Release
+```
+
+Publish the application:
+
+```bash
+dotnet publish --configuration Release
+```
+
+The published files will be generated inside the project's `bin/Release` directory.
+
+### 2. Configure the Production Database
+
+Create a SQL Server database on the target environment and execute:
+
+```text
+StudySpaceApp/Database/StudySpaceDB.sql
+```
+
+Verify that the following tables exist:
+
+- `Users`
+- `TodoTasks`
+- `Notes`
+
+### 3. Configure the Production Connection String
+
+The application requires a `DefaultConnection` connection string.
+
+The connection string should be configured through the hosting environment rather than stored directly in the source code.
+
+Example:
+
+```text
+Server=YOUR_SERVER;
+Database=StudySpaceDB;
+User Id=YOUR_USER;
+Password=YOUR_PASSWORD;
+TrustServerCertificate=True;
+```
+
+### 4. Run the Published Application
+
+After configuring the database and connection string, deploy the published files to the target hosting environment.
+
+The target environment must support the required .NET runtime, unless the application is published as self-contained.
+
+### Security
+
+Sensitive information such as database passwords, credentials, and production connection strings should not be committed to GitHub.
+
+For local development, the application uses **.NET User Secrets** for sensitive configuration.
+
+For production, sensitive values should be configured through the hosting environment.
+
 ## Usage
 
-1. **Log In** - Enter your credentials to access your personal dashboard
-2. **Manage Tasks** - Add new tasks, mark them as complete, or delete them
-3. **Take Notes** - Create quick study notes for reference
-4. **Use Pomodoro** - Start a Pomodoro session for focused work intervals
-5. **Explore Calendar** - Navigate through previous and next months
-6. **Customize Theme** - Select your preferred visual theme for a comfortable study environment
-7. **Play Music** - Enable background music or ambient sounds to stay focused
+1. **Log In** - Enter your credentials to access the dashboard
+2. **Manage Tasks** - Add, complete, or delete tasks
+3. **Take Notes** - Create and delete study notes
+4. **Use Pomodoro** - Start focus and break sessions
+5. **Explore Calendar** - Navigate through months
+6. **Customize Theme** - Select a visual theme
+7. **Play Music** - Enable background music or ambient sounds
 
 ## Database Schema
 
-The database includes tables for:
-- **Users** - User accounts and authentication
-- **TodoTasks** - Todo items linked to users
-- **Notes** - Study notes linked to users
+The database contains the following main tables:
 
-Refer to `Database/StudySpaceDB.sql` for the complete schema.
+- **Users** - User accounts and authentication data
+- **TodoTasks** - Tasks associated with users
+- **Notes** - Notes associated with users
+
+Refer to `StudySpaceApp/Database/StudySpaceDB.sql` for the complete database schema.
